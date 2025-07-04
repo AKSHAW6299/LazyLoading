@@ -17,6 +17,7 @@
 
 
 // **2) Performance optmized code! => [INSPECT => LIGHTHOUSE SCORE 82%]
+// Note: We can write lazy() or, React.lazy()
 import React, { lazy, Suspense, useState } from 'react'
 const User = lazy(() => import('./User'))
 
