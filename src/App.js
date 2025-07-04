@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+// // 1) Normal code => [INSPECT => LIGHTHOUSE SCORE 76%]
+// import React, { useState } from 'react'
+// import User from './User'
+
+// function App() {
+// const [load, setLoad] = useState(false)
+//   return (
+//     <div>
+//       <h1>Lazy loading</h1>
+//       <button onClick={() => setLoad(true)}>Load user</button>
+//       {load ? <User /> : null}
+//     </div>
+//   )
+// }
+// export default App
+
+
+
+// **2) Performance optmized code! => [INSPECT => LIGHTHOUSE SCORE 82%]
+import React, { lazy, Suspense, useState } from 'react'
+const User = lazy(() => import('./User'))
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const [load, setLoad] = useState(false)
 
-export default App;
+  return (
+    <div>
+      <h1>Lazy loading</h1>
+      <button onClick={() => setLoad(true)}>Load user</button>
+      {load ? <Suspense fallback={<h3>loding...</h3>}><User /></Suspense> : null}
+
+    </div>
+  )
+}
+export default App
